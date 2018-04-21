@@ -1,0 +1,26 @@
+<div class="container color-dark">
+<div class="col">
+  <p>Add Employee</p>
+</div>
+<div class="col">
+  <p>Your Employee list here...({{ employeeListLength }})</p>
+</div>
+</div>
+
+<div class="container color-light" [@employeeList]="employeeList.length">
+  <div class="col">
+    <p>Use this form to add employee...</p>
+    <form>
+      <input type="text" class="txt" name="employeeName" placeholder="Employee name here" [(ngModel)]="employeeName">
+      <input type="submit" class="btn" value="Add" (click)="addEmployee()">
+    </form>
+  </div>
+
+  <div class="col">
+    <p class="life-container" *ngFor="let employee of employeeList">
+      {{ employee }}
+    </p>
+  </div>
+</div>
+
+
