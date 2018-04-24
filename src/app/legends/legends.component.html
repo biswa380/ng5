@@ -1,0 +1,17 @@
+<div class="container color-light" >
+  <div class="col">
+    <p>Use this form to add employee...</p>
+    <form>
+      <input type="text" class="txt" name="heroName" placeholder="Hero name here" [(ngModel)]="hero.name">
+      <input type="text" class="txt" name="power" placeholder="Hero power here" [(ngModel)]="hero.power">
+      <input type="text" class="txt" name="counter" placeholder="Counter hero here" [(ngModel)]="hero.counter">
+      <input type="submit" class="btn" value="Add" (click)="addHero()">
+    </form>
+  </div>
+
+  <div class="col">
+    <p class="life-container" *ngFor="let hero of heroes">
+      {{ hero.name }}
+    </p>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations'
 import { DataService } from '../data.service'
+import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-home',
@@ -27,11 +28,11 @@ export class HomeComponent implements OnInit {
   employeeName :string;
   employeeListLength :number;
   employeeList = [];
-  constructor(private _data: DataService) { }
+  constructor(private _data: DataService, private http: HttpClientModule) { }
 
   ngOnInit() {
     this.employeeListLength=this.employeeList.length;
-    if(!this._data.employees.includes(this.employeeList)){
+    if(this._data.employees!=this.employeeList){
       this.employeeList=this._data.employees;
       this.employeeListLength=this.employeeList.length;
     }
