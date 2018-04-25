@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.employeeListLength=this.employeeList.length;
-    if(this._data.employees!=this.employeeList){
+    if(this._data.employees!=this.employeeList && this._data.employees!=undefined){
       this.employeeList=this._data.employees;
       this.employeeListLength=this.employeeList.length;
     }
