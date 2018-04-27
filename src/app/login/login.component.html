@@ -1,0 +1,10 @@
+<div class="container color-light">
+  <div class="col">
+    <p>Login here</p>
+    <form>
+      <input type="text" class="txt" name="username" placeholder="Username here" [(ngModel)]="user.username">
+      <input type="password" class="txt" name="password" placeholder="Password here" [(ngModel)]="user.password">
+      <input type="submit" class="btn" value="Login" (click)="login()">
+    </form>
+  </div>
+</div>
