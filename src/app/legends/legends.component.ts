@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Hero } from './models/hero'
 import { error } from 'protractor';
+import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-legends',
@@ -10,7 +11,7 @@ import { error } from 'protractor';
 })
 export class LegendsComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _data: DataService) { }
 
   hero: Hero={
     counter:null,
@@ -26,7 +27,7 @@ export class LegendsComponent implements OnInit {
   }
 
   addHero(){
-   this.http.post('/api/saveHero', this.hero).subscribe(response=>{
+   this.http.post('/api/saveHero?access_token='+this._data.access_key.access_token, this.hero).subscribe(response=>{
      console.log(response);
    },error=>{
      console.log(error);
@@ -41,7 +42,7 @@ export class LegendsComponent implements OnInit {
   }
 
   getHeroList(){
-    this.http.get('/api/getHeroes').subscribe(res=>{
+    this.http.get('/api/getHeroes?access_token='+this._data.access_key.access_token).subscribe(res=>{
       console.log(res);
       this.heroes=res;      
     })
