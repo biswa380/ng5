@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
 import { LegendsComponent } from './legends/legends.component';
 import { LoginComponent } from './login/login.component'
+import { CookieService } from 'ngx-cookie-service'
 @Injectable()
 export class XhrInterceptor implements HttpInterceptor {
 
@@ -38,7 +39,7 @@ return next.handle(xhr);
       BrowserAnimationsModule,
       HttpClientModule
     ],
-  providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [DataService,{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
