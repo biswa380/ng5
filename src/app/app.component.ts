@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(private _data:DataService, private cookie:CookieService, private router:Router){}
+  logout(){
+    this._data=null;
+    this.cookie.set('access_token','');
+    this.cookie.set('refresh_token','');
+
+    alert('User logged out!!!')
+    this.router.navigateByUrl('login');
+  }
 }

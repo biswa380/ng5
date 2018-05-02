@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
       this._data.access_key=response;
       this.cookie.set('access_token',this._data.access_key.access_token);
       this.cookie.set('refresh_token',this._data.access_key.refresh_token);
+      
       this.http.get('/user').subscribe(user=>console.log(user));
       this.router.navigateByUrl('legends');
     })

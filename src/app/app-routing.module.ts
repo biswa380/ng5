@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component'
 import { AboutComponent } from './about/about.component'
 import { LegendsComponent } from './legends/legends.component';
 import { LoginComponent } from './login/login.component';
+import { LoggedInAuthGuardService } from './logged-in-auth-guard.service';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'legends',
-    component: LegendsComponent
+    component: LegendsComponent,
+    canActivate: [LoggedInAuthGuardService]
   },
   {
     path: 'login',
