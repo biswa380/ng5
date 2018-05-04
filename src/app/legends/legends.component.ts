@@ -14,6 +14,7 @@ export class LegendsComponent implements OnInit {
 
   constructor(private http: HttpClient, private _data: DataService, private cookie:CookieService) { }
 
+  reqHeader = new HttpHeaders({Authorization:'bearer '+this._data.access_key.access_token})
   hero: Hero={
     counter:null,
     id:null,
@@ -28,7 +29,7 @@ export class LegendsComponent implements OnInit {
   }
 
   addHero(){
-   this.http.post('/api/saveHero?access_token='+this.cookie.get('access_token'), this.hero).subscribe(response=>{
+   this.http.post('/api/saveHero', this.hero, {headers:this.reqHeader}).subscribe(response=>{
      console.log(response);
    },error=>{
      console.log(error);
@@ -43,8 +44,7 @@ export class LegendsComponent implements OnInit {
   }
 
   getHeroList(){
-    // var reqHeader = new HttpHeaders({access_token:this._data.access_key.access_token})
-    this.http.get('/api/getHeroes?access_token='+this.cookie.get('access_token')).subscribe(res=>{
+      this.http.get('/api/getHeroes',{headers:this.reqHeader}).subscribe(res=>{
       console.log(res);
       this.heroes=res;      
     })

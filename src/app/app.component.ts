@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(private _data:DataService, private cookie:CookieService, private router:Router){}
   logout(){
     this._data=null;
-    this.cookie.set('access_token','');
-    this.cookie.set('refresh_token','');
+    this.cookie.delete('access_token');
+    this.cookie.delete('refresh_token');
 
     alert('User logged out!!!')
     this.router.navigateByUrl('login');

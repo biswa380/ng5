@@ -16,30 +16,32 @@ export class LoginComponent implements OnInit {
 
     
 
-    var reqHeader = new HttpHeaders({authorization:'Basic c2thdGVyaWs6cGFzcw=='});
-    let myObservable=Observable.interval(20000);
+    // var reqHeader = new HttpHeaders({authorization:'Basic c2thdGVyaWs6cGFzcw=='});
+    // let myObservable=Observable.interval(300000);
 
-    myObservable.subscribe(x=>{
-      this.http.post('/oauth/token?grant_type=refresh_token&refresh_token='+this.cookie.get('refresh_token'),{"headers":reqHeader})
-      .subscribe(response=>{
-        console.log(response)
-        this._data.access_key=response;
-      })
-    })
+    // myObservable.subscribe(x=>{
+    //   this.http.post('/oauth/token?grant_type=refresh_token&refresh_token='+this.cookie.get('refresh_token'),{"headers":reqHeader})
+    //   .subscribe(response=>{
+    //     console.log(response)
+    //     this._data.access_key=response;
+    //   })
+    // })
   }
 
   ngOnInit() {
   }
   user={
+    grant_type : '',
     username : '',
     password: ''
   }
-  login(){
-    // this.http.post('login',this.user).subscribe(response=>console.log(response))
-    // var reqHeader = new HttpHeaders({authorization:'Basic '+ btoa('skaterik:pass')});
-    
-    var reqHeader = new HttpHeaders({authorization:'Basic c2thdGVyaWs6cGFzcw=='});
-    this.http.post('/oauth/token?grant_type=password&username='+this.user.username+'&password='+this.user.password,{"headers":reqHeader})
+  login(){ 
+    // var reqHeader = new HttpHeaders({authorization:'Basic c2thdGVyaWs6cGFzcw=='});
+    this.user.grant_type = 'password';
+    // var reqHeader = new HttpHeaders({username:this.user.username, password: this.user.password, grant_type: this.user.grant_type})
+    this.http.post('/oauth/token?grant_type='+this.user.grant_type+'&username='+this.user.username+'&password='+this.user.password,{})
+    // const credentials = {username: 'skaterik', password: 'pass'};
+    // return this.http.post<any>('/token/generate-token', credentials)
     .subscribe(response=>{
       console.log(response)
       this._data.access_key=response;
